@@ -2,6 +2,8 @@
 
 namespace KnpU\LoremIpsumBundle;
 
+use Exception;
+
 /**
  * Generate random "lorem ipsum" text KnpUniversity style!
  *
@@ -13,13 +15,18 @@ class KnpUIpsum
 
     private $minSunshine;
 
-    private $wordProvider;
+    /**
+     * @var WordProviderInterface[] $wordProviders
+     */
+    private $wordProviders;
 
-    public function __construct(KnpWordProviderInterface $wordProvider,bool $unicornsAreReal = true, $minSunshine = 3)
+    private $wordList;
+
+    public function __construct(iterable $wordProviders,bool $unicornsAreReal = true, $minSunshine = 3)
     {
         $this->unicornsAreReal = $unicornsAreReal;
         $this->minSunshine = $minSunshine;
-        $this->wordProvider = $wordProvider;
+        $this->wordProviders = $wordProviders;
     }
 
     /**
@@ -205,6 +212,20 @@ class KnpUIpsum
 
     private function getWordList(): array
     {
-        return $this->wordProvider->getWordList();
+        if(null === $this->wordList) {
+            $words = [];
+            foreach($this->wordProviders as $wordProvider) {
+                $words = array_merge($words, $wordProvider->getWordList());
+            }          
+        
+            if(count($words) <= 1) {
+                throw new Exception('Word List must contain at least 2 words');
+            }
+
+            $this->wordList = $words;
+        }
+        
+
+        return $this->wordList;
     }
 }

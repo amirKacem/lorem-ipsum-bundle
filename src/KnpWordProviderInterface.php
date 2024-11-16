@@ -2,7 +2,8 @@
 
 namespace KnpU\LoremIpsumBundle;
 
-interface KnpWordProviderInterface {
+interface KnpWordProviderInterface 
+{
 
     /**
      * Returns array of words to use for fake text
