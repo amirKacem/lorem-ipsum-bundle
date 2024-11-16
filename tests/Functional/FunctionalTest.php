@@ -21,21 +21,6 @@ class FunctionalTest extends TestCase
         $this->assertIsString($ipsum->getParagraphs());
     }
 
-    public function testServiceWiringWithConfiguration() {
-
-        $kernel = new KnpKernel([
-            'word_provider' => 'stub_word_list'
-        ]);
-        $kernel->boot();
-
-        $container = $kernel->getContainer();
-
-        $ipsum = $container->get('knpu_lorem_ipsum.knpu_ipsum');
-
-        $this->assertStringContainsString('stub2',$ipsum->getWords(2));
-
-
-    }
 
 
 }

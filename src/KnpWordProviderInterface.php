@@ -2,13 +2,12 @@
 
 namespace KnpU\LoremIpsumBundle;
 
-interface KnpWordProviderInterface 
+interface KnpWordProviderInterface
 {
-
     /**
      * Returns array of words to use for fake text
-     * 
+     *
      * @return array
      */
-    public function  getWordList() : array;
+    public function getWordList(): array;
 }

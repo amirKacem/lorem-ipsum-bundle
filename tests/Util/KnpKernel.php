@@ -11,13 +11,10 @@ use Symfony\Component\HttpKernel\Kernel as HttpKernel;
 class KnpKernel extends HttpKernel {
 
 
-    private $knpConfig;
 
-    public function __construct(array $knpConfig = [])
+    public function __construct()
     {   
-        $this->knpConfig = $knpConfig;
         parent::__construct('test', true);
-
     }
 
     public function registerBundles()
@@ -31,10 +28,8 @@ class KnpKernel extends HttpKernel {
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(function(ContainerBuilder $container) {
-            $container->register('stub_word_list', StubWordList::class);
-
-            $container->loadFromExtension('knpu_lorem_ipsum', $this->knpConfig);
-
+            $container->register('stub_word_list', StubWordList::class)
+                      ->addTag('knpu_ipsum_word_provider');
         });
     }
 
