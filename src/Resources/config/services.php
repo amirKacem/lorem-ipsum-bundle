@@ -14,6 +14,7 @@ return static function (ContainerConfigurator $container) {
               ->set('knpu_lorem_ipsum.knpu_ipsum', KnpUIpsum::class)
               ->arg(0, tagged_iterator('knpu_ipsum_word_provider'))
               ->alias(KnpUIpsum::class, 'knpu_lorem_ipsum.knpu_ipsum')
+              ->public()
               ->set('knpu_lorem_ipsum.knpu_word_provider', KnpUWordProvider::class)
               ->tag('knpu_ipsum_word_provider')
               ->alias('knpu_lorem_ipsum.word_provider', 'knpu_lorem_ipsum.knpu_word_provider')
