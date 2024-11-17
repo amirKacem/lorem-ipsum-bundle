@@ -16,7 +16,7 @@ class FunctionalTest extends TestCase
 
         $container = $kernel->getContainer();
 
-        $ipsum = $container->get('knpu_lorem_ipsum.knpu_ipsum');
+        $ipsum = $container->get(KnpUIpsum::class);
         $this->assertInstanceOf(KnpUIpsum::class,$ipsum);
         $this->assertIsString($ipsum->getParagraphs());
     }
