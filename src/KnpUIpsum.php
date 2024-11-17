@@ -45,9 +45,9 @@ class KnpUIpsum
         return implode("\n\n", $paragraphs);
     }
 
-    public function getSentences(float $count = 1): string
+    public function getSentences(float $count = 1.0): string
     {
-        $count = $count < 1 ? 1 : $count;
+        $count = (int) $count < 1 ? 1 : $count;
         $sentences = array();
 
         for ($i = 0; $i < $count; $i++) {
